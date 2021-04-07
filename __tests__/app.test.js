@@ -51,5 +51,19 @@ describe('flower CRUD routes', () => {
                 });
             });
     });
+    //deletes a flower
+    it('deletes a flower quantity when given an id', () => {
+        Flower.insert({"flowerName": "sunflower", "flowerType": "perrenial", "flowerQuantity": "3"});
+        return request(app)
+            .delete('/api/v1/flowers/1')
+            .then((res) => {
+                expect(res.body).toEqual({
+                    id: '1',
+                    flowerName: 'sunflower',
+                    flowerType: 'perrenial',
+                    flowerQuantity: 3
+                });
+            });
+    });
 
 });
