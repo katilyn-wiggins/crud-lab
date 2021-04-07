@@ -36,4 +36,34 @@ describe('Tree CRUD routes', () => {
                 }]);
             });
     });
+    //update
+    it('updates a tree given an id', () => {
+        Tree.insert({"treeName": "birch", "treeType": "dedeciduous hardwood", "treeQuantity": "1"})
+        return request(app)
+            .put('/api/v1/trees/1')
+            .send({"treeQuantity": "15"})
+            .then((res) => {
+                expect(res.body).toEqual({
+                    treeId: '1',
+                    treeName: 'birch',
+                    treeType: 'dedeciduous hardwood',
+                    treeQuantity: 15
+                });
+            });
+    });
+
+    //delete
+    it('deletes a tree given an id', () => {
+        Tree.insert({"treeName": "birch", "treeType": "dedeciduous hardwood", "treeQuantity": "1"})
+        return request(app)
+            .delete('/api/v1/trees/1')
+            .then((res) => {
+                expect(res.body).toEqual({
+                    treeId: '1',
+                    treeName: 'birch',
+                    treeType: 'dedeciduous hardwood',
+                    treeQuantity: 1
+                });
+            });
+    });
 }); 
