@@ -36,5 +36,20 @@ describe('flower CRUD routes', () => {
                 }]);
             });
     });
+    //updates a flower
+    it('updates a flower quantity when given an id and new quantity', () => {
+        Flower.insert({"flowerName": "sunflower", "flowerType": "perrenial", "flowerQuantity": "3"});
+        return request(app)
+            .put('/api/v1/flowers/1')
+            .send({"flowerQuantity": "6"})
+            .then((res) => {
+                expect(res.body).toEqual({
+                    id: '1',
+                    flowerName: 'sunflower',
+                    flowerType: 'perrenial',
+                    flowerQuantity: 6
+                });
+            });
+    });
 
 });
