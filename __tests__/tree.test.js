@@ -36,6 +36,20 @@ describe('Tree CRUD routes', () => {
                 }]);
             });
     });
+    //get by id
+    it('shows all trees with corresponding id', () => {
+        Tree.insert({"treeName": "birch", "treeType": "dedeciduous hardwood", "treeQuantity": "1"})
+        return request(app)
+            .get('/api/v1/trees/1')
+            .then((res) => {
+                expect(res.body).toEqual([{
+                    treeId: '1',
+                    treeName: 'birch',
+                    treeType: 'dedeciduous hardwood',
+                    treeQuantity: 1
+                }]);
+            });
+    });
     //update
     it('updates a tree given an id', () => {
         Tree.insert({"treeName": "birch", "treeType": "dedeciduous hardwood", "treeQuantity": "1"})
